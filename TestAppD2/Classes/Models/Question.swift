@@ -19,7 +19,7 @@ struct Item: Decodable {
     let last_activity_date: Int?
     let title: String?
     var smartDateFormat: String? {
-        return Item.timeAgoString(from: Date.init(timeIntervalSince1970: TimeInterval(exactly: self.last_activity_date!)!) ?? Date())
+        return Item.timeAgoString(from: Date.init(timeIntervalSince1970: TimeInterval(exactly: self.last_activity_date!)!) )
     }
 
     static func timeAgoString(from date: Date?) -> String? {

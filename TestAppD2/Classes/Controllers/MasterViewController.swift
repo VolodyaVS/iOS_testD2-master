@@ -93,7 +93,7 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
             questions = [Item]()
         }
         if let items = try? JSONDecoder().decode(Question.self, from: jsonData!).items {
-            questions = questions! + items!
+            questions = questions! + items
         }
         DispatchQueue.main.async(execute: {
             self.tableView.reloadData()
