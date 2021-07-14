@@ -16,20 +16,23 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         menuTableView.delegate = self
         menuTableView.dataSource = self
     }
-    
+
+    // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ArrayOfTags.shared.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "CellForMenuTableView", for: indexPath)
+        let cell: UITableViewCell = tableView.dequeueReusableCell(
+            withIdentifier: "CellForMenuTableView",
+            for: indexPath)
         cell.textLabel?.text = ArrayOfTags.shared[indexPath.row]
         return cell
     }
-    
+
+    // MARK: - Table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NotificationCenter.default.post(name: NSNotification.Name("RequestedTagNotification"),
                                         object: ArrayOfTags.shared[indexPath.row])
     }
-
 }

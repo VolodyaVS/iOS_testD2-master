@@ -18,6 +18,7 @@ class QuestionTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         corneredView.layer.cornerRadius = 20
         corneredView.layer.masksToBounds = false
         corneredView.layer.shadowOpacity = 0.2
@@ -30,8 +31,10 @@ class QuestionTableViewCell: UITableViewCell {
         quesionLabel.text = question?.title
         autorLabel.text = question?.owner?.display_name
         numberOfAnswerLabel.text = String(format: "%li", Int(question?.answer_count ?? 0))
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm d-MM-yyyy"
+
         if let aFormat = question?.smartDateFormat {
             let aDate = Date.init(timeIntervalSince1970: TimeInterval(exactly: ((question?.last_activity_date)!))!)
             dateModificationLabel.text = "\(dateFormatter.string(from: aDate)) \(aFormat)"
