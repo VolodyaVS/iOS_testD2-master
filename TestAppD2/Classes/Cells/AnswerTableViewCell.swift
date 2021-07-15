@@ -63,9 +63,9 @@ class AnswerTableViewCell: UITableViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm d-MM-yyyy"
         
-        if let last_activity_date = answer?.last_activity_date {
+        if let last_activity_date = answer?.lastActivityDate {
             lastActivityDateLabel.text = "\(dateFormatter.string(from: Date.init(timeIntervalSince1970: TimeInterval(exactly: last_activity_date)!)))"
         }
-        checkImageView.isHidden = (answer?.is_accepted != nil)
+        checkImageView.isHidden = (answer?.isAccepted != nil)
     }
 }
