@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CacheWithTimeInterval: NSObject {
+class CacheWithTimeInterval {
 
     class func objectForKey(_ key: String) -> Data? {
         var arrayOfCachedData: [Data] = []
@@ -21,12 +21,13 @@ class CacheWithTimeInterval: NSObject {
 
         var mutableArrayOfCachedData = arrayOfCachedData
         var deletedCount = 0
+        var objectFromCachedData: Data?
 
         for (index, data) in arrayOfCachedData.enumerated() {
             let storedData = try! PropertyListDecoder().decode(StoredData.self, from: data)
-            if abs(storedData.date.timeIntervalSinceNow) < 5*60 {
+            if abs(storedData.date.timeIntervalSinceNow) < 5 * 60 {
                 if storedData.key == key {
-                    return storedData.data
+                    objectFromCachedData = storedData.data
                 }
             } else {
                 mutableArrayOfCachedData.remove(at: index - deletedCount)
@@ -34,7 +35,7 @@ class CacheWithTimeInterval: NSObject {
                 UserDefaults.standard.set(mutableArrayOfCachedData, forKey: "cache")
             }
         }
-        return nil
+        return objectFromCachedData
     }
     
     class func set(data: Data?, for key: String) {
