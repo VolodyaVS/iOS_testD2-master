@@ -17,7 +17,7 @@ class DetailViewController: UIViewController {
     // MARK: - Public Properties
     var refreshControl: UIRefreshControl!
     var activityIndicatorView: UIActivityIndicatorView!
-    var answers: [AnswerItem]! = [AnswerItem()]
+    var answers: [AnswerItem]!
     var currentQuestion: Item!
 
     // MARK: - Private Properties

@@ -9,15 +9,15 @@
 import Foundation
 
 class Answer: Decodable {
-    var items: [AnswerItem]?
+    let items: [AnswerItem]?
 }
 
 struct AnswerItem: Decodable {
-    var owner: Owner?
-    var score: Int?
-    var lastActivityDate: Int?
-    var body: String?
-    var isAccepted: Bool?
+    let owner: Owner?
+    let score: Int?
+    let lastActivityDate: Int?
+    let body: String?
+    let isAccepted: Bool?
 }
 
 struct Owner: Decodable {
