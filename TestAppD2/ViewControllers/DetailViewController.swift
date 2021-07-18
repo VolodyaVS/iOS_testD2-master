@@ -45,14 +45,7 @@ class DetailViewController: UIViewController {
 
     func addActivityIndicator() {
         activityIndicatorView = UIActivityIndicatorView()
-        activityIndicatorView.style = .gray
-
-        let bounds: CGRect = UIScreen.main.bounds
-
-        activityIndicatorView.center = CGPoint(x: bounds.size.width / 2, y:
-                                                bounds.size.height / 2)
-        activityIndicatorView.hidesWhenStopped = true
-
+        ActivityIndicatorView.setupUI(for: activityIndicatorView)
         view.addSubview(activityIndicatorView)
     }
     
