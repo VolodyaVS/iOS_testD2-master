@@ -118,20 +118,20 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: kQuestionCellIdentifier,
-                                                     for: indexPath) as? QuestionTableViewCell
-            cell?.fill(currentQuestion)
+                                                     for: indexPath) as! QuestionTableViewCell
+            cell.fill(currentQuestion)
 
-            titleNavigationItem.title = "\(String(describing: currentQuestion.title))"
-            return cell!
+            titleNavigationItem.title = currentQuestion.title
+            return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: kAnswerCellIdentifier,
-                                                     for: indexPath) as? AnswerTableViewCell
+                                                     for: indexPath) as! AnswerTableViewCell
 
             var answer: AnswerItem?
             answer = answers?[indexPath.row - 1]
 
-            cell?.fill(answer)
-            return cell!
+            cell.fill(answer)
+            return cell
         }
     }
 }
