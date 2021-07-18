@@ -64,7 +64,7 @@
         <scene sceneID="EOA-1r-zS5">
             <objects>
                 <viewController id="shY-Rs-ztY" customClass="ContainerViewController" customModule="TestAppD2" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3Lt-Jc-oBX">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="3Lt-Jc-oBX">
                         <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -137,11 +137,11 @@
             <objects>
                 <viewController storyboardIdentifier="DetailViewController" id="KM6-rU-ZrG" customClass="DetailViewController" customModule="TestAppD2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z8Y-u4-NsJ">
-                        <rect key="frame" x="0.0" y="0.0" width="812" height="331"/>
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dQP-Ji-mPT">
-                                <rect key="frame" x="44" y="0.0" width="724" height="331"/>
+                                <rect key="frame" x="44" y="0.0" width="724" height="354"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <sections/>
                                 <connections>
@@ -227,6 +227,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qH9-IS-w9N"/>
+        <segue reference="OKb-Ta-VDn"/>
     </inferredMetricsTieBreakers>
 </document>

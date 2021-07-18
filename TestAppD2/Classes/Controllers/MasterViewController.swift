@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MasterViewController: UIViewController {
 
     // MARK: - IB Outlets
     @IBOutlet var tableView: UITableView!
@@ -16,13 +16,13 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var trailingTableViewLayoutConstraint: NSLayoutConstraint!
 
     // MARK: - Public Properties
-    let kCellIdentifier = "CellForQuestion"
+    let questionCellID = "CellForQuestion"
     var activityIndicatorView: UIActivityIndicatorView!
-    var questions: [Item]? = []
+    var questions: [Item]?
 
     var refreshControl: UIRefreshControl?
     var loadMoreStatus = false
-    var numberOfPageToLoad: Int = 0
+    var numberOfPageToLoad = 0
     var requestedTag = ""
 
     var panRecognizer: UIPanGestureRecognizer?
@@ -31,18 +31,19 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Override methods
     override func viewDidLoad() {
         tableView.register(UINib(nibName: "QuestionTableViewCell", bundle: nil),
-                           forCellReuseIdentifier: kCellIdentifier)
+                           forCellReuseIdentifier: questionCellID)
 
         numberOfPageToLoad = 1
         addRefreshControlOnTabelView()
         settingDynamicHeightForCell()
         addActivityIndicator()
 
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(
-                                                self.requestedTagNotification(_:)),
-                                               name: NSNotification.Name("RequestedTagNotification"),
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.requestedTagNotification(_:)),
+            name: NSNotification.Name("RequestedTagNotification"),
+            object: nil
+        )
 
         requestedTag = ArrayOfTags.shared[0]
 
@@ -169,29 +170,6 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         })
     }
 
-    // MARK: - Table view data source
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if questions?.count == 0 {
-            activityIndicatorView.startAnimating()
-        }
-        return questions?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier, for: indexPath) as? QuestionTableViewCell
-
-        if questions?.count ?? 0 > 0 {
-            cell?.fill(questions?[indexPath.row])
-        }
-        return cell!
-    }
-
-    // MARK: - Table view delegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailSegue", sender: self)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
     // MARK: - Scroll view delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let actualPosition: CGFloat = scrollView.contentOffset.y
@@ -230,3 +208,28 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 }
 
+extension MasterViewController: UITableViewDelegate, UITableViewDataSource {
+
+    // MARK: - Table view data source
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if questions?.count == 0 {
+            activityIndicatorView.startAnimating()
+        }
+        return questions?.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: questionCellID, for: indexPath) as? QuestionTableViewCell
+
+        if questions?.count ?? 0 > 0 {
+            cell?.fill(questions?[indexPath.row])
+        }
+        return cell!
+    }
+
+    // MARK: - Table view delegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "DetailSegue", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
