@@ -91,7 +91,10 @@ class DetailViewController: UIViewController {
     func reload(inTableView jsonData: Data?) {
         answers = [AnswerItem]()
 
-        if let answerModel = try? JSONDecoder().decode(Answer.self, from: jsonData!) {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        if let answerModel = try? decoder.decode(Answer.self, from: jsonData!) {
             answers = answerModel.items
         }
 

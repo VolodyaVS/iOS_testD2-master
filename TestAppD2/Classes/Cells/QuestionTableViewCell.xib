@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -98,11 +96,11 @@
             </tableViewCellContentView>
             <accessibility key="accessibilityConfiguration" identifier="Cell"/>
             <connections>
-                <outlet property="autorLabel" destination="JfF-og-tDV" id="bN2-IL-Byb"/>
+                <outlet property="authorLabel" destination="JfF-og-tDV" id="bN2-IL-Byb"/>
                 <outlet property="corneredView" destination="UI2-f1-s54" id="hFv-Xt-Sf0"/>
                 <outlet property="dateModificationLabel" destination="VKf-P4-XIg" id="ujD-Dm-QrT"/>
                 <outlet property="numberOfAnswerLabel" destination="EXZ-A8-kDm" id="KpA-a3-LbB"/>
-                <outlet property="quesionLabel" destination="HLq-55-4wg" id="n8v-dm-Yav"/>
+                <outlet property="questionLabel" destination="HLq-55-4wg" id="n8v-dm-Yav"/>
             </connections>
             <point key="canvasLocation" x="-2085.5999999999999" y="-68.365817091454275"/>
         </tableViewCell>

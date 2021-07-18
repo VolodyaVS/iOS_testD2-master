@@ -10,9 +10,9 @@ import UIKit
 
 class QuestionTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var quesionLabel: UILabel!
-    @IBOutlet weak var autorLabel: UILabel!
-    @IBOutlet var dateModificationLabel: UILabel!
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var dateModificationLabel: UILabel!
     @IBOutlet weak var numberOfAnswerLabel: UILabel!
     @IBOutlet weak var corneredView: UIView!
     
@@ -28,15 +28,15 @@ class QuestionTableViewCell: UITableViewCell {
     }
 
     func fill(_ question: Item?) {
-        quesionLabel.text = question?.title
-        autorLabel.text = question?.owner?.display_name
+        questionLabel.text = question?.title
+        authorLabel.text = question?.owner?.displayName
         numberOfAnswerLabel.text = String(format: "%li", Int(question?.answer_count ?? 0))
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm d-MM-yyyy"
 
         if let aFormat = question?.smartDateFormat {
-            let aDate = Date.init(timeIntervalSince1970: TimeInterval(exactly: ((question?.last_activity_date)!))!)
+            let aDate = Date.init(timeIntervalSince1970: TimeInterval(exactly: (((question?.last_activity_date)!)))!)
             dateModificationLabel.text = "\(dateFormatter.string(from: aDate)) \(aFormat)"
         }
     }

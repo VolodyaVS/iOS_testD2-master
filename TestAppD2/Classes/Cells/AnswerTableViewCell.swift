@@ -57,14 +57,14 @@ class AnswerTableViewCell: UITableViewCell {
         }
         
         answerLabel.attributedText = attributedString
-        authorLabel.text = answer?.owner?.display_name
+        authorLabel.text = answer?.owner?.displayName
         numberOfVotesLabel.text = String(format: "%li", Int(answer?.score ?? 0))
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm d-MM-yyyy"
         
-        if let last_activity_date = answer?.lastActivityDate {
-            lastActivityDateLabel.text = "\(dateFormatter.string(from: Date.init(timeIntervalSince1970: TimeInterval(exactly: last_activity_date)!)))"
+        if let lastActivityDate = answer?.lastActivityDate {
+            lastActivityDateLabel.text = "\(dateFormatter.string(from: Date.init(timeIntervalSince1970: TimeInterval(exactly: lastActivityDate)!)))"
         }
         checkImageView.isHidden = (answer?.isAccepted != nil)
     }

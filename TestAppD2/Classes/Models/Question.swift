@@ -23,6 +23,8 @@ struct Item: Decodable {
     }
 
     static func timeAgoString(from date: Date?) -> String? {
+        var timeAgoString = ""
+
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .full
 
@@ -34,7 +36,7 @@ struct Item: Decodable {
             components = calendar.dateComponents([.year, .month, .weekOfMonth, .day, .hour, .minute, .second], from: aDate, to: now)
             
             if components.year! > 0 {
-                formatter.allowedUnits = NSCalendar.Unit.year
+                formatter.allowedUnits = .year
             } else if components.month! > 0 {
                 formatter.allowedUnits = .month
             } else if components.weekOfMonth! > 0 {
@@ -48,12 +50,10 @@ struct Item: Decodable {
             } else {
                 formatter.allowedUnits = .second
             }
-            return "  \(formatter.string(from: components) ?? "") ago"
-        }
-        return ""
-    }
-}
+            timeAgoString = "  \(formatter.string(from: components) ?? "") ago"
 
-struct Owner: Decodable {
-    let display_name: String?
+            return timeAgoString
+        }
+        return timeAgoString
+    }
 }
