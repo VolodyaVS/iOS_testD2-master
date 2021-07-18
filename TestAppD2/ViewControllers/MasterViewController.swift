@@ -162,9 +162,11 @@ class MasterViewController: UIViewController {
             questions = [Item]()
         }
 
-        if let items = try? JSONDecoder().decode(Question.self,
-                                                 from: jsonData!).items {
-            questions = questions! + items
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        if let questionModel = try? JSONDecoder().decode(Question.self, from: jsonData!) {
+            questions = questionModel.items
         }
         DispatchQueue.main.async(execute: {
             self.tableView.reloadData()

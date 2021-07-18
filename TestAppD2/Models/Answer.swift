@@ -19,7 +19,3 @@ struct AnswerItem: Decodable {
     let body: String?
     let isAccepted: Bool?
 }
-
-struct Owner: Decodable {
-    let displayName: String?
-}

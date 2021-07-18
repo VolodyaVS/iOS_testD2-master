@@ -57,3 +57,7 @@ struct Item: Decodable {
         return timeAgoString
     }
 }
+
+struct Owner: Decodable {
+    let display_name: String?
+}

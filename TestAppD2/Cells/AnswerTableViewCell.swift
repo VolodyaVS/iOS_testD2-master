@@ -44,8 +44,8 @@ class AnswerTableViewCell: UITableViewCell {
             }
         }
         
-        var cycle: Bool = true
-        
+        var cycle = true
+
         while cycle {
             if let aSearch = (answerBody as NSString?)?.range(of: "<[^>]+>", options: .regularExpression), aSearch.location != NSNotFound {
                 attributedString.removeAttribute(.backgroundColor, range: aSearch)
@@ -57,7 +57,7 @@ class AnswerTableViewCell: UITableViewCell {
         }
         
         answerLabel.attributedText = attributedString
-        authorLabel.text = answer?.owner?.displayName
+        authorLabel.text = answer?.owner?.display_name
         numberOfVotesLabel.text = String(format: "%li", Int(answer?.score ?? 0))
         
         let dateFormatter = DateFormatter()

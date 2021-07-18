@@ -29,7 +29,7 @@ class QuestionTableViewCell: UITableViewCell {
 
     func fill(_ question: Item?) {
         questionLabel.text = question?.title
-        authorLabel.text = question?.owner?.displayName
+        authorLabel.text = question?.owner?.display_name
         numberOfAnswerLabel.text = String(format: "%li", Int(question?.answer_count ?? 0))
 
         let dateFormatter = DateFormatter()
