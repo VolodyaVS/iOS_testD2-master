@@ -16,7 +16,6 @@ class MasterViewController: UIViewController {
     @IBOutlet weak var trailingTableViewLayoutConstraint: NSLayoutConstraint!
 
     // MARK: - Public Properties
-    let questionCellID = "CellForQuestion"
     var activityIndicatorView: UIActivityIndicatorView!
     var questions: [Item]?
 
@@ -27,6 +26,9 @@ class MasterViewController: UIViewController {
 
     var panRecognizer: UIPanGestureRecognizer?
     var screenEdgePanRecognizer: UIScreenEdgePanGestureRecognizer?
+
+    // MARK: - Private Properties
+    private let questionCellID = "CellForQuestion"
 
     // MARK: - Override methods
     override func viewDidLoad() {
@@ -219,12 +221,12 @@ extension MasterViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: questionCellID, for: indexPath) as? QuestionTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: questionCellID, for: indexPath) as! QuestionTableViewCell
 
         if questions?.count ?? 0 > 0 {
-            cell?.fill(questions?[indexPath.row])
+            cell.fill(questions?[indexPath.row])
         }
-        return cell!
+        return cell
     }
 
     // MARK: - Table view delegate

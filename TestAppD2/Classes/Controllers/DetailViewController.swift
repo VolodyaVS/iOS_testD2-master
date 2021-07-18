@@ -21,15 +21,15 @@ class DetailViewController: UIViewController {
     var currentQuestion: Item!
 
     // MARK: - Private Properties
-    private let kQuestionCellIdentifier = "CellForQuestion"
-    private let kAnswerCellIdentifier = "CellForAnswer"
+    private let questionCellID = "CellForQuestion"
+    private let answerCellID = "CellForAnswer"
 
     // MARK: - Override methods
     override func viewDidLoad() {
         tableView.register(UINib(nibName: "AnswerTableViewCell", bundle: nil),
-                           forCellReuseIdentifier: kAnswerCellIdentifier)
+                           forCellReuseIdentifier: answerCellID)
         tableView.register(UINib(nibName: "QuestionTableViewCell", bundle: nil),
-                           forCellReuseIdentifier: kQuestionCellIdentifier)
+                           forCellReuseIdentifier: questionCellID)
 
         addRefreshControlOnTabelView()
         settingDynamicHeightForCell()
@@ -117,18 +117,17 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: kQuestionCellIdentifier,
+            let cell = tableView.dequeueReusableCell(withIdentifier: questionCellID,
                                                      for: indexPath) as! QuestionTableViewCell
             cell.fill(currentQuestion)
 
             titleNavigationItem.title = currentQuestion.title
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: kAnswerCellIdentifier,
+            let cell = tableView.dequeueReusableCell(withIdentifier: answerCellID,
                                                      for: indexPath) as! AnswerTableViewCell
 
-            var answer: AnswerItem?
-            answer = answers?[indexPath.row - 1]
+            let answer = answers?[indexPath.row - 1]
 
             cell.fill(answer)
             return cell

@@ -23,7 +23,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(
+        let cell = tableView.dequeueReusableCell(
             withIdentifier: "CellForMenuTableView",
             for: indexPath)
         cell.textLabel?.text = ArrayOfTags.shared[indexPath.row]
