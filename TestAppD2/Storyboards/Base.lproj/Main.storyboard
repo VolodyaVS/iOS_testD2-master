@@ -99,7 +99,7 @@
                     <navigationItem key="navigationItem" id="ia8-X7-gX6">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="KT5-hJ-qiq">
                             <connections>
-                                <action selector="menu:" destination="shY-Rs-ztY" id="2S6-gu-bbS"/>
+                                <action selector="menuAction:" destination="shY-Rs-ztY" id="2S6-gu-bbS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

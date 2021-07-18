@@ -29,28 +29,20 @@ class ContainerViewController: UIViewController {
     }
 
     // MARK: - IB Actions
-    @IBAction func menu(_ sender: Any) {
+    @IBAction func menuAction(_ sender: Any) {
         if leadingTabelViewLayoutConstraint.constant == 0 {
             leadingTabelViewLayoutConstraint.constant = UIScreen.main.bounds.size.width / 2
             trailingTableViewLayoutConstraint.constant = UIScreen.main.bounds.size.width * -0.5
-
-            UIView.animate(withDuration: 0.3,
-                           delay: 0.0,
-                           options: .layoutSubviews,
-                           animations: {
-                            self.view.layoutIfNeeded()
-                           })
         } else {
             leadingTabelViewLayoutConstraint.constant = 0
             trailingTableViewLayoutConstraint.constant = 0
-
-            UIView.animate(withDuration: 0.3,
-                           delay: 0.0,
-                           options: .layoutSubviews,
-                           animations: {
-                            self.view.layoutIfNeeded()
-                           })
         }
+        UIView.animate(withDuration: 0.3,
+                       delay: 0.0,
+                       options: .layoutSubviews,
+                       animations: {
+                        self.view.layoutIfNeeded()
+                       })
     }
 
     // MARK: - Public methods
@@ -58,5 +50,4 @@ class ContainerViewController: UIViewController {
         let requestedTag = notification.object as! String
         title = requestedTag
     }
-
 }
