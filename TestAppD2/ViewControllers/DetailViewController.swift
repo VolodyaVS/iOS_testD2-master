@@ -17,7 +17,7 @@ class DetailViewController: UIViewController {
     // MARK: - Public Properties
     var refreshControl: UIRefreshControl!
     var activityIndicatorView: UIActivityIndicatorView!
-    var answers: [AnswerItem]!
+    var answers = [AnswerItem]()
     var currentQuestion: Item!
 
     // MARK: - Private Properties
@@ -95,7 +95,7 @@ class DetailViewController: UIViewController {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
         if let answerModel = try? decoder.decode(Answer.self, from: jsonData!) {
-            answers = answerModel.items
+            answers = answerModel.items!
         }
 
         DispatchQueue.main.async(execute: {
@@ -127,7 +127,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: answerCellID,
                                                      for: indexPath) as! AnswerTableViewCell
 
-            let answer = answers?[indexPath.row - 1]
+            let answer = answers[indexPath.row - 1]
 
             cell.fill(answer)
             return cell
