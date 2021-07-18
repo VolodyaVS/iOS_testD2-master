@@ -78,13 +78,6 @@ class MasterViewController: UIViewController {
             leadingTabelViewLayoutConstraint.constant = UIScreen.main.bounds.size.width / 2
             trailingTableViewLayoutConstraint.constant = UIScreen.main.bounds.size.width * -0.5
 
-            UIView.animate(withDuration: 0.3,
-                           delay: 0.0,
-                           options: .layoutSubviews,
-                           animations: {
-                            self.view.layoutIfNeeded()
-                           })
-
             screenEdgePanRecognizer?.isEnabled = false
             panRecognizer?.isEnabled = true
             tableView.allowsSelection = false
@@ -92,17 +85,16 @@ class MasterViewController: UIViewController {
             leadingTabelViewLayoutConstraint.constant = 0
             trailingTableViewLayoutConstraint.constant = 0
 
-            UIView.animate(withDuration: 0.3,
-                           delay: 0.0,
-                           options: .layoutSubviews,
-                           animations: {
-                            self.view.layoutIfNeeded()
-                           })
-
             screenEdgePanRecognizer?.isEnabled = true
             panRecognizer?.isEnabled = false
             tableView.allowsSelection = true
         }
+        UIView.animate(withDuration: 0.3,
+                       delay: 0.0,
+                       options: .layoutSubviews,
+                       animations: {
+                        self.view.layoutIfNeeded()
+                       })
     }
 
     // MARK: - Public methods
