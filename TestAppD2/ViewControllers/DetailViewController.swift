@@ -38,7 +38,7 @@ class DetailViewController: UIViewController {
 
     // MARK: - Public methods
     func loadAnswers() {
-        FabricRequest.request(withQuestionID: currentQuestion.question_id!) { data in
+        FabricRequest.request(withQuestionID: currentQuestion.question_id ?? 0) { data in
             self.reload(inTableView: data)
         }
     }
@@ -87,8 +87,8 @@ class DetailViewController: UIViewController {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
-        if let answerModel = try? decoder.decode(Answer.self, from: jsonData!) {
-            answers = answerModel.items!
+        if let answerModel = try? decoder.decode(Answer.self, from: jsonData ?? Data()) {
+            answers = answerModel.items ?? [AnswerItem]()
         }
 
         DispatchQueue.main.async(execute: {

@@ -150,7 +150,7 @@ class MasterViewController: UIViewController {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
-        if let questionModel = try? JSONDecoder().decode(Question.self, from: jsonData!) {
+        if let questionModel = try? JSONDecoder().decode(Question.self, from: jsonData ?? Data()) {
             questions = questionModel.items
         }
         DispatchQueue.main.async(execute: {

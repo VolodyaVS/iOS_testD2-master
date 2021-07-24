@@ -36,7 +36,7 @@ class QuestionTableViewCell: UITableViewCell {
         dateFormatter.dateFormat = "HH:mm d-MM-yyyy"
 
         if let aFormat = question?.smartDateFormat {
-            let aDate = Date.init(timeIntervalSince1970: TimeInterval(exactly: (((question?.last_activity_date)!)))!)
+            let aDate = Date.init(timeIntervalSince1970: TimeInterval(exactly: (((question?.last_activity_date ?? 0)))) ?? 0.0)
             dateModificationLabel.text = "\(dateFormatter.string(from: aDate)) \(aFormat)"
         }
     }

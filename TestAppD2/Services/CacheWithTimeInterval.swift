@@ -24,10 +24,10 @@ class CacheWithTimeInterval {
         var objectFromCachedData: Data?
 
         for (index, data) in arrayOfCachedData.enumerated() {
-            let storedData = try! PropertyListDecoder().decode(StoredData.self, from: data)
-            if abs(storedData.date.timeIntervalSinceNow) < 5 * 60 {
-                if storedData.key == key {
-                    objectFromCachedData = storedData.data
+            let storedData = try? PropertyListDecoder().decode(StoredData.self, from: data)
+            if abs(storedData?.date.timeIntervalSinceNow ?? 0) < 5 * 60 {
+                if storedData?.key == key {
+                    objectFromCachedData = storedData?.data
                 }
             } else {
                 mutableArrayOfCachedData.remove(at: index - deletedCount)
@@ -49,7 +49,7 @@ class CacheWithTimeInterval {
             if CacheWithTimeInterval.objectForKey(key) == nil {
                 let storedData = StoredData(key: key, date: Date(), data: data!)
                 let data = try? PropertyListEncoder().encode(storedData)
-                arrayOfCachedData.append(data!)
+                arrayOfCachedData.append(data ?? Data())
             }
         }
         UserDefaults.standard.set(arrayOfCachedData, forKey: "cache")

@@ -35,17 +35,17 @@ struct Item: Decodable {
         if let aDate = date {
             components = calendar.dateComponents([.year, .month, .weekOfMonth, .day, .hour, .minute, .second], from: aDate, to: now)
             
-            if components.year! > 0 {
+            if components.year ?? 0 > 0 {
                 formatter.allowedUnits = .year
-            } else if components.month! > 0 {
+            } else if components.month ?? 0 > 0 {
                 formatter.allowedUnits = .month
-            } else if components.weekOfMonth! > 0 {
+            } else if components.weekOfMonth ?? 0 > 0 {
                 formatter.allowedUnits = .weekOfMonth
-            } else if components.day! > 0 {
+            } else if components.day ?? 0 > 0 {
                 formatter.allowedUnits = .day
-            } else if components.hour! > 0 {
+            } else if components.hour ?? 0 > 0 {
                 formatter.allowedUnits = .hour
-            } else if components.minute! > 0 {
+            } else if components.minute ?? 0 > 0 {
                 formatter.allowedUnits = .minute
             } else {
                 formatter.allowedUnits = .second
