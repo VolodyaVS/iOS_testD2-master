@@ -32,6 +32,8 @@ class MasterViewController: UIViewController {
 
     // MARK: - Override methods
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         tableView.register(UINib(nibName: "QuestionTableViewCell", bundle: nil),
                            forCellReuseIdentifier: questionCellID)
 

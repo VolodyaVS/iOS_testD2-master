@@ -26,6 +26,8 @@ class DetailViewController: UIViewController {
 
     // MARK: - Override methods
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         tableView.register(UINib(nibName: "AnswerTableViewCell", bundle: nil),
                            forCellReuseIdentifier: answerCellID)
         tableView.register(UINib(nibName: "QuestionTableViewCell", bundle: nil),

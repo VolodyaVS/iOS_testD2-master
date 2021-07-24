@@ -19,6 +19,8 @@ class ContainerViewController: UIViewController {
     
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
+        super.viewDidLoad()
+
         navigationItem.title = "Objective-C"
 
         NotificationCenter.default.addObserver(
