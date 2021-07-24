@@ -19,44 +19,7 @@ class AnswerTableViewCell: UITableViewCell {
     func fill(_ answer: AnswerItem?) {
         backgroundColor = UIColor.white
         
-        var answerBody = answer?.body
-        
-        let attributedString = NSMutableAttributedString(string: answer?.body ?? "")
-        let pattern = "<code>[^>]+</code>"
-        let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive)
-        let matches = regex?.matches(
-            in: answerBody ?? "",
-            options: [],
-            range: NSRange(location: 0, length: answerBody?.count ?? 0)
-        )
-        
-        for match in matches ?? [] {
-            attributedString.addAttribute(
-                .backgroundColor,
-                value: UIColor(red: 0,
-                               green: 110.0 / 255.0,
-                               blue: 200.0 / 255.0,
-                               alpha: 0.5),
-                range: match.range)
-            
-            if let aSize = UIFont(name: "Courier", size: 17) {
-                attributedString.addAttribute(.font, value: aSize, range: match.range)
-            }
-        }
-        
-        var cycle = true
-
-        while cycle {
-            if let aSearch = (answerBody as NSString?)?.range(of: "<[^>]+>", options: .regularExpression), aSearch.location != NSNotFound {
-                attributedString.removeAttribute(.backgroundColor, range: aSearch)
-                attributedString.replaceCharacters(in: aSearch, with: "\n")
-                answerBody = (answerBody as NSString?)?.replacingCharacters(in: aSearch, with: "\n")
-            } else {
-                cycle = false
-            }
-        }
-        
-        answerLabel.attributedText = attributedString
+        answerLabel.attributedText = ProcessingHTML.processHTML(answer)
         authorLabel.text = answer?.owner?.display_name
         numberOfVotesLabel.text = String(format: "%li", Int(answer?.score ?? 0))
         
