@@ -163,8 +163,8 @@ class MasterViewController: UIViewController {
 
     // MARK: - Scroll view delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let actualPosition: CGFloat = scrollView.contentOffset.y
-        let contentHeight: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
+        let actualPosition = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height - scrollView.frame.size.height
 
         if actualPosition >= contentHeight && actualPosition > 0 && loadMoreStatus == false {
             let bounds: CGRect = UIScreen.main.bounds
