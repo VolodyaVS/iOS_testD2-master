@@ -8,22 +8,26 @@
 
 import UIKit
 
-class CacheWithTimeInterval: NSObject {
+class CacheWithTimeInterval {
 
     class func objectForKey(_ key: String) -> Data? {
         var arrayOfCachedData: [Data] = []
+
         if UserDefaults.standard.array(forKey: "cache") != nil {
             arrayOfCachedData = UserDefaults.standard.array(forKey: "cache") as! [Data]
         } else {
             arrayOfCachedData = []
         }
+
         var mutableArrayOfCachedData = arrayOfCachedData
         var deletedCount = 0
+        var objectFromCachedData: Data?
+
         for (index, data) in arrayOfCachedData.enumerated() {
-            let storedData = try! PropertyListDecoder().decode(StoredData.self, from: data)
-            if abs(storedData.date.timeIntervalSinceNow) < 5*60 {
-                if storedData.key == key {
-                    return storedData.data
+            let storedData = try? PropertyListDecoder().decode(StoredData.self, from: data)
+            if abs(storedData?.date.timeIntervalSinceNow ?? 0) < 5 * 60 {
+                if storedData?.key == key {
+                    objectFromCachedData = storedData?.data
                 }
             } else {
                 mutableArrayOfCachedData.remove(at: index - deletedCount)
@@ -31,22 +35,23 @@ class CacheWithTimeInterval: NSObject {
                 UserDefaults.standard.set(mutableArrayOfCachedData, forKey: "cache")
             }
         }
-        return nil
+        return objectFromCachedData
     }
     
     class func set(data: Data?, for key: String) {
         var arrayOfCachedData: [Data] = []
+
         if UserDefaults.standard.array(forKey: "cache") != nil {
             arrayOfCachedData = UserDefaults.standard.array(forKey: "cache") as! [Data]
         }
+
         if data != nil {
             if CacheWithTimeInterval.objectForKey(key) == nil {
                 let storedData = StoredData(key: key, date: Date(), data: data!)
                 let data = try? PropertyListEncoder().encode(storedData)
-                arrayOfCachedData.append(data!)
+                arrayOfCachedData.append(data ?? Data())
             }
         }
         UserDefaults.standard.set(arrayOfCachedData, forKey: "cache")
     }
-    
 }

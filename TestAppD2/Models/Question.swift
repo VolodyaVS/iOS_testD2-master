@@ -19,35 +19,42 @@ struct Item: Decodable {
     let last_activity_date: Int?
     let title: String?
     var smartDateFormat: String? {
-        return Item.timeAgoString(from: Date.init(timeIntervalSince1970: TimeInterval(exactly: self.last_activity_date!)!) ?? Date())
+        Item.timeAgoString(from: Date.init(timeIntervalSince1970: TimeInterval(exactly: self.last_activity_date!)!))
     }
 
     static func timeAgoString(from date: Date?) -> String? {
+        var timeAgoString = ""
+
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .full
+
         let now = Date()
         let calendar = Calendar.current
         var components: DateComponents
+
         if let aDate = date {
             components = calendar.dateComponents([.year, .month, .weekOfMonth, .day, .hour, .minute, .second], from: aDate, to: now)
-            if components.year! > 0 {
-                formatter.allowedUnits = NSCalendar.Unit.year
-            } else if components.month! > 0 {
+            
+            if components.year ?? 0 > 0 {
+                formatter.allowedUnits = .year
+            } else if components.month ?? 0 > 0 {
                 formatter.allowedUnits = .month
-            } else if components.weekOfMonth! > 0 {
+            } else if components.weekOfMonth ?? 0 > 0 {
                 formatter.allowedUnits = .weekOfMonth
-            } else if components.day! > 0 {
+            } else if components.day ?? 0 > 0 {
                 formatter.allowedUnits = .day
-            } else if components.hour! > 0 {
+            } else if components.hour ?? 0 > 0 {
                 formatter.allowedUnits = .hour
-            } else if components.minute! > 0 {
+            } else if components.minute ?? 0 > 0 {
                 formatter.allowedUnits = .minute
             } else {
                 formatter.allowedUnits = .second
             }
-            return "  \(formatter.string(from: components) ?? "") ago"
+            timeAgoString = "  \(formatter.string(from: components) ?? "") ago"
+
+            return timeAgoString
         }
-        return ""
+        return timeAgoString
     }
 }
 
