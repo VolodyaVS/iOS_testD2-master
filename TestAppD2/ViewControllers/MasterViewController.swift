@@ -55,8 +55,8 @@ class MasterViewController: UIViewController {
 
         questions = [Item]()
 
-        FabricRequest.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { (data) in
-            self.reload(inTableView: data, removeAllObjects: true)
+        FabricRequest.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { [weak self] data in
+            self?.reload(inTableView: data, removeAllObjects: true)
         }
 
         numberOfPageToLoad += 1
@@ -124,8 +124,8 @@ class MasterViewController: UIViewController {
         numberOfPageToLoad = 1
 
         FabricRequest.request(tagged: requestedTag,
-                              numberOfPageToLoad: numberOfPageToLoad) { (data) in
-            self.reload(inTableView: data, removeAllObjects: true)
+                              numberOfPageToLoad: numberOfPageToLoad) { [weak self] data in
+            self?.reload(inTableView: data, removeAllObjects: true)
         }
 
         numberOfPageToLoad += 1
@@ -176,11 +176,11 @@ class MasterViewController: UIViewController {
             loadMoreStatus = true
 
             FabricRequest.request(tagged: requestedTag,
-                                  numberOfPageToLoad: numberOfPageToLoad) { (data) in
-                self.reload(inTableView: data, removeAllObjects: false)
-                self.loadMoreStatus = false
-                self.numberOfPageToLoad += 1
-                self.activityIndicatorView.center = CGPoint(x: bounds.size.width / 2,
+                                  numberOfPageToLoad: numberOfPageToLoad) { [weak self] data in
+                self?.reload(inTableView: data, removeAllObjects: false)
+                self?.loadMoreStatus = false
+                self?.numberOfPageToLoad += 1
+                self?.activityIndicatorView.center = CGPoint(x: bounds.size.width / 2,
                                                             y: bounds.size.height / 2)
             }
         }
@@ -192,8 +192,8 @@ class MasterViewController: UIViewController {
         requestedTag = notification?.object as! String
         numberOfPageToLoad = 1
 
-        FabricRequest.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { (data) in
-            self.reload(inTableView: data, removeAllObjects: true)
+        FabricRequest.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { [weak self] data in
+            self?.reload(inTableView: data, removeAllObjects: true)
         }
         numberOfPageToLoad += 1
     }

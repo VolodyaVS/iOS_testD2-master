@@ -40,8 +40,8 @@ class DetailViewController: UIViewController {
 
     // MARK: - Public methods
     func loadAnswers() {
-        FabricRequest.request(withQuestionID: currentQuestion.question_id ?? 0) { data in
-            self.reload(inTableView: data)
+        FabricRequest.request(withQuestionID: currentQuestion.question_id ?? 0) { [weak self] data in
+            self?.reload(inTableView: data)
         }
     }
 
