@@ -63,7 +63,7 @@ class MasterViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let indexPath: IndexPath? = tableView.indexPathForSelectedRow
+        let indexPath = tableView.indexPathForSelectedRow
         let detailViewController = (segue.destination as? UINavigationController)?.topViewController as? DetailViewController
         let item = questions?[indexPath?.row ?? 0]
 
@@ -181,7 +181,7 @@ class MasterViewController: UIViewController {
                 self?.loadMoreStatus = false
                 self?.numberOfPageToLoad += 1
                 self?.activityIndicatorView.center = CGPoint(x: bounds.size.width / 2,
-                                                            y: bounds.size.height / 2)
+                                                             y: bounds.size.height / 2)
             }
         }
     }
